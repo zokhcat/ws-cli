@@ -1,7 +1,10 @@
-use reqwest::Error;
+use std::io::Error;
 use scraper::{Html, Selector};
 
-use super::url_scrape::url_scrape;
+use super::{
+    url_scrape::url_scrape, 
+    click::click
+};
 
 pub fn capture(url: &str, css_selector: &str) -> Result<(), Error> {
     let html_content = url_scrape(url);
@@ -13,6 +16,8 @@ pub fn capture(url: &str, css_selector: &str) -> Result<(), Error> {
     for element in document.select(&selector) {
         println!("{}", element.inner_html());
     }
+
+    
 
     Ok(())
 }
