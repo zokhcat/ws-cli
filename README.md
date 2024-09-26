@@ -1,4 +1,4 @@
-Note: Compiles on rust nightly version
+Note: Compiles on rust nightly version only
 
 Todos:
 
