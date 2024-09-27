@@ -67,4 +67,4 @@ cargo run -- click_on https://example.com button
 
 - [x] Multi URL handling
 - [ ] Configurable Output
-- [ ] Verbose Mode
+- [x] Verbose Mode

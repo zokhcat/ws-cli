@@ -11,6 +11,13 @@ fn main() {
     .version("0.0.1")
     .author("Zoheb Khan zoheballikhan@gmail.com")
     .about("A CLI tool for web scraping")
+    .arg(
+        Arg::new("verbose")
+            .short('v')
+            .long("verbose")
+            .help("Sets the level of verbosity")
+            .action(clap::ArgAction::SetTrue),
+    )
     .subcommand(
         Command::new("show_code")
         .about("Shows the raw HTML code of a URL")
@@ -35,24 +42,30 @@ fn main() {
     )
     .get_matches();
 
+    let verbose = matches.get_flag("verbose");
+    
+    if verbose {
+        println!("Verbose mode enabled");
+    }
+
     match matches.subcommand() {
         ("show_code", Some(sub_m)) => {
             let urls = sub_m.value_of("URL").unwrap();
             for url in urls {
-                url_scrape(url)
+                url_scrape(url, verbose)
             }
         }
         ("navigate", Some(sub_m)) => {
             let urls = sub_m.value_of("URL").unwrap();
             for url in urls {
-                open_url(url);
+                open_url(url, verbose);
             }
         }
         ("capture", Some(sub_m)) => {
             let urls = sub_m.value_of("URL").unwrap();
             let css_selector = sub_m.value_of("CSS_SELECTOR").unwrap();
             for url in urls {
-                capture(url, css_selector);
+                capture(url, css_selector, verbose);
             }
 
         }
@@ -60,7 +73,7 @@ fn main() {
             let urls = sub_m.value_of("URL").unwrap();
             let css_selector = sub_m.value_of("CSS_SELECTOR").unwrap();
             for url in urls {
-                click(url, css_selector);
+                click(url, css_selector, verbose);
             }
         }
         _ => {
