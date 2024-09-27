@@ -63,8 +63,8 @@ Clicks on an element using a CSS selector.
 cargo run -- click_on https://example.com button
 ```
 
-Future Todos:
+### Future Todos:
 
-- [ ] Multi URL handling
+- [x] Multi URL handling
 - [ ] Configurable Output
 - [ ] Verbose Mode

@@ -37,22 +37,31 @@ fn main() {
 
     match matches.subcommand() {
         ("show_code", Some(sub_m)) => {
-            let url = sub_m.value_of("URL").unwrap();
-            url_scrape(url);
+            let urls = sub_m.value_of("URL").unwrap();
+            for url in urls {
+                url_scrape(url)
+            }
         }
         ("navigate", Some(sub_m)) => {
-            let url = sub_m.value_of("URL").unwrap();
-            open_url(url);
+            let urls = sub_m.value_of("URL").unwrap();
+            for url in urls {
+                open_url(url);
+            }
         }
         ("capture", Some(sub_m)) => {
-            let url = sub_m.value_of("URL").unwrap();
+            let urls = sub_m.value_of("URL").unwrap();
             let css_selector = sub_m.value_of("CSS_SELECTOR").unwrap();
-            capture(url, css_selector);
+            for url in urls {
+                capture(url, css_selector);
+            }
+
         }
         ("click_on", Some(sub_m)) => {
-            let url = sub_m.value_of("URL").unwrap();
+            let urls = sub_m.value_of("URL").unwrap();
             let css_selector = sub_m.value_of("CSS_SELECTOR").unwrap();
-            click(url, css_selector);
+            for url in urls {
+                click(url, css_selector);
+            }
         }
         _ => {
             eprintln!("Invalid command. Use --help for more information.");
